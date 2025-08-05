@@ -3,7 +3,7 @@ package com.saida.akart_task.dto.response;
 import lombok.Data;
 
 @Data
-public class TokenDto {
+public class TokenResponseDto {
 
     private String token;
 
