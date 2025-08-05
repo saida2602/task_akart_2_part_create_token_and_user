@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: akart
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3317}/mysql_akart_new
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+server:
+  port: 8082
+
+secret:
+  key: RmRfZ296bGVpcm5fbmVfZGV5aXJfYmFzYV9kdXN1cmVtX25peWVfY2FzZGlyaXJzYW5fZGlsaW5sZV9tZW5pX1Nh
+  duration: 300
+logging:
+  level:
+    com.saida.akart_task: DEBUG
+
+

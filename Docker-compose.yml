@@ -1,0 +1,45 @@
+version: "1.0"
+
+services:
+  mysql-service:
+    image: mysql
+    hostname: mysql_hostname
+    restart: always
+    container_name: mysql-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=mysql_akart_new
+    ports:
+      - "8085:3306"
+    networks:
+      custom-network:
+    volumes:
+      - db_akart:/var/lib/mysql
+
+  adminer_ui_for_db:
+    image: adminer
+    restart: always
+    container_name: adminer-container
+    depends_on:
+      - mysql-service
+    ports:
+      - "8098:8080"
+    networks:
+      custom-network:
+
+  spring-akart-app:
+    networks:
+      custom-network:
+    image: akart-app-image
+    container_name: akart-app-container
+    ports:
+      - "8080:8082"
+    environment:
+      - DB_HOST=mysql-container
+      - DB_PORT=3306
+
+volumes:
+  db_akart:
+
+networks:
+  custom-network:
